@@ -5,34 +5,35 @@
     <PackageVersion Condition=" '$(PackageVersion)' == '' ">4.0.0-local</PackageVersion>
     <PackageVersion Condition=" '$(PackageVersion)' != '' ">$(PackageVersion)</PackageVersion>
   </PropertyGroup>
-
+  
+  <PropertyGroup>
+    <OutputPath Condition="$(OutputPath) == ''">bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>true</DelaySign>
-    <AssemblyOriginatorKeyFile>..\..\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Microsoft.Bot.Builder.Core.State</PackageId>
-    <Description>This library provides state management for building bots using the Microsoft Bot Builder.</Description>
-    <Summary>This library provides state management for building bots using the Microsoft Bot Builder.</Summary>
+    <Summary>This library provides a set of state management APIs to assist with building bots using the Microsoft Bot Builder SDK.</Summary>
+    <Description>This library provides a set of state management APIs to assist with building bots using the Microsoft Bot Builder SDK.</Description>
   </PropertyGroup>
 
   <PropertyGroup>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Company>Microsoft</Company>
-    <Authors>microsoft,BotFramework,nugetbotbuilder</Authors>
+    <GeneratePackageOnBuild Condition="$(Configuration) == 'Release'">true</GeneratePackageOnBuild>
+    <Company>Hacked.Brain</Company>
+    <Authors>Drew Marsh (@drub0y)</Authors>
     <Product>Microsoft Bot Builder SDK</Product>
-    <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
-    <PackageProjectUrl>https://github.com/Microsoft/botbuilder-dotnet</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/drub0y/botbuilder-core-state-dotnet</PackageProjectUrl>
     <PackageIconUrl>http://docs.botframework.com/images/bot_icon.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/Microsoft/BotBuilder/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/drub0y/botbuilder-core-state-dotnet/blob/master/LICENSE</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <RepositoryUrl>https://github.com/Microsoft/botbuilder-dotnet</RepositoryUrl>
-    <LicenseUrl>https://github.com/Microsoft/BotBuilder-dotnet/blob/master/LICENSE</LicenseUrl>
+    <RepositoryUrl>https://github.com/drub0y/botbuilder-core-state-dotnet</RepositoryUrl>
+    <LicenseUrl>https://github.com/drub0y/botbuilder-core-state-dotnet/blob/master/LICENSE</LicenseUrl>
     <RepositoryType />
-    <PackageTags>bots;ai;botframework;botbuilder</PackageTags>
+    <PackageTags>bots;ai;botframework;botbuilder;state;</PackageTags>
     <NeutralLanguage />
   </PropertyGroup>
 

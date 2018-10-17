@@ -19,7 +19,7 @@
             var value = this.MaterializeValue<T>();
 
             SetValue(value);
-            
+
             return value;
         }
 

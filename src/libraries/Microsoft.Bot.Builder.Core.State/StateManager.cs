@@ -61,7 +61,16 @@ namespace Microsoft.Bot.Builder.Core.State
             else
             {
                 stateEntry.IsDirty = true;
-                stateEntry.IsPendingDeletion = false;
+
+                if (stateEntry.IsPendingDeletion)
+                {
+                    if(stateEntry.StateStorageEntry == null)
+                    {
+                        stateEntry.StateStorageEntry = StorageProvider.CreateNewEntry(Namespace, key);
+                    }
+
+                    stateEntry.IsPendingDeletion = false;
+                }
             }
 
             stateEntry.StateStorageEntry.SetValue(state);
@@ -104,6 +113,15 @@ namespace Microsoft.Bot.Builder.Core.State
             {
                 stateEntry.IsPendingDeletion = true;
             }
+            else
+            {
+                _state.Add(
+                    key,
+                    new StateEntry
+                    {
+                        IsPendingDeletion = true
+                    });
+            }
         }
 
         public async Task SaveChanges()
@@ -129,6 +147,10 @@ namespace Microsoft.Bot.Builder.Core.State
 
         private sealed class StateEntry
         {
+            public StateEntry()
+            {
+            }
+
             public StateEntry(IStateStorageEntry stateStorageEntry, bool isDirty = false)
             {
                 StateStorageEntry = stateStorageEntry;
